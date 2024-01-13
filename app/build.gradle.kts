@@ -14,13 +14,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "CARD_INFO", "\"cardinfo.php\"")
     }
     flavorDimensions += "api"
 
     productFlavors {
+
         create("dev") {
             resValue("string","app_name","YuGiOh-DEV")
             buildConfigField("String", "URL_BASE", "\"https://db.ygoprodeck.com/api/v7/\"")
+
+
             applicationIdSuffix =".dev"
 
         }
@@ -33,11 +38,16 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
         }
     }
     compileOptions {
