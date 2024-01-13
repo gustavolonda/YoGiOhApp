@@ -15,6 +15,21 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions += "api"
+
+    productFlavors {
+        create("dev") {
+            resValue("string","app_name","YuGiOh-DEV")
+            buildConfigField("String", "URL_BASE", "\"https://db.ygoprodeck.com/api/v7/\"")
+            applicationIdSuffix =".dev"
+
+        }
+
+        create("pro") {
+            resValue ("string","app_name","YuGiOh")
+            buildConfigField("String", "URL_BASE", "\"https://db.ygoprodeck.com/api/v7/\"")
+        }
+    }
 
     buildTypes {
         release {
@@ -31,10 +46,15 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig =true
     }
 }
 
 dependencies {
+    //Retrofit2
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.6.4")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -44,4 +64,5 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 }
