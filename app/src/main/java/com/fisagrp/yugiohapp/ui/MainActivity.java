@@ -1,39 +1,40 @@
 package com.fisagrp.yugiohapp.ui;
 
+import static com.fisagrp.yugiohapp.util.FragmentUtil.addFragment;
+
 import android.os.Bundle;
 
 import com.fisagrp.yugiohapp.R;
-import com.google.android.material.snackbar.Snackbar;
+import com.fisagrp.yugiohapp.data.database.CardDao;
+import com.fisagrp.yugiohapp.data.database.AppDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
-import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.fisagrp.yugiohapp.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-
+    AppDatabase db;
+    CardDao cardDao;
+    CardFragment cardFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (savedInstanceState == null)
+        {
+            // Init Fragment
+            cardFragment = CardFragment.newInstance();
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_container, cardFragment, CardFragment.TAG)
+                    .commit();
+
+        } else {
+            // Get Fragment
+            cardFragment = (CardFragment) getSupportFragmentManager().findFragmentByTag(CardFragment.TAG);
+        }
     }
-    protected void addFragment(Fragment fragment) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.frame_container,fragment,"Fragment");
-        transaction.commit();
-    }
+
 }
