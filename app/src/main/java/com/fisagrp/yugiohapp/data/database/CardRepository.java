@@ -11,15 +11,17 @@ import com.fisagrp.yugiohapp.data.entity.CardWithCardSetCardImageCardPriceEntity
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public class CardRepository {
     AppDatabase appDatabase;
     private CardDao cardDao;
     private LiveData<List<CardWithCardSetCardImageCardPriceEntity>> cardWithCardSetCardImageCardPriceEntitylist;
-
+    private LiveData<CardWithCardSetCardImageCardPriceEntity> cardDetailsLiveData;
     public CardRepository(Application application) {
         appDatabase = AppDatabase.getDatabase(application);
         cardDao = appDatabase.getCardDao();
-        cardWithCardSetCardImageCardPriceEntitylist = cardDao.getCardWithCardSetCardImageCardPriceEntitys();
+
     }
 
     public void insertCardAll(List<CardEntity> cardEntitylist) {
@@ -27,6 +29,16 @@ public class CardRepository {
     }
 
     public LiveData<List<CardWithCardSetCardImageCardPriceEntity>> getCardWithCardSetCardImageCardPriceEntitylist() {
+        cardWithCardSetCardImageCardPriceEntitylist = cardDao.getCardWithCardSetCardImageCardPriceEntitys();
         return cardWithCardSetCardImageCardPriceEntitylist;
+    }
+
+    public LiveData<CardWithCardSetCardImageCardPriceEntity> getCardWithCardSetCardImageCardById(int cardId) {
+        cardDetailsLiveData = cardDao.getCardWithCardSetCardImageCardPriceEntitysById(cardId);
+        return cardDetailsLiveData;
+    }
+
+    public List<CardWithCardSetCardImageCardPriceEntity> getCardByArcheType(String archeType) {
+        return cardDao.getCardByArcheType(archeType);
     }
 }

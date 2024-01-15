@@ -16,15 +16,20 @@ import java.util.List;
 @Dao
 public abstract class CardDao {
     public void insertAll(List<CardEntity> cardEntityList) {
-        _insertAll(cardEntityList);
-        for(CardEntity cardEntity:cardEntityList) {
-            if(cardEntity.cardSetList != null ||
-                    cardEntity.cardImageList != null ||
-                    cardEntity.cardPriceList != null) {
-                insertCardSetsForCardEntity(cardEntity);
+        try {
+            _insertAll(cardEntityList);
+            for(CardEntity cardEntity:cardEntityList) {
+                if(cardEntity.cardSetList != null ||
+                        cardEntity.cardImageList != null ||
+                        cardEntity.cardPriceList != null) {
+                    insertCardSetsForCardEntity(cardEntity);
 
+                }
             }
+        }catch (Exception e) {
+            e.printStackTrace();
         }
+
 
     }
 
@@ -56,4 +61,9 @@ public abstract class CardDao {
     @Query("SELECT * FROM cards")
     abstract LiveData<List<CardWithCardSetCardImageCardPriceEntity>> getCardWithCardSetCardImageCardPriceEntitys();
 
+    @Query("SELECT * FROM cards where id = :cardId")
+    abstract LiveData<CardWithCardSetCardImageCardPriceEntity> getCardWithCardSetCardImageCardPriceEntitysById(int cardId);
+
+    @Query("SELECT * FROM cards where archetype = :archeType")
+    abstract List<CardWithCardSetCardImageCardPriceEntity> getCardByArcheType(String archeType);
 }
