@@ -1,2 +1,4 @@
 # Yu-Gi-Oh
-[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">](https://github.com/gustavolonda/YuGiOhApp/blob/main/demo/demo.mp4 "Demo App")
+
+
+<code><p align="center"><img height="400" src="https://github.com/gustavolonda/YuGiOhApp/blob/main/demo/demo.gif" title="app" style="display: block;margin-left: auto;margin-right: auto;"></p></code>
