@@ -16,6 +16,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "CARD_INFO", "\"cardinfo.php\"")
+        buildConfigField("String", "NAME_DATA_BASE", "\"card_database\"")
     }
     flavorDimensions += "api"
 
@@ -56,15 +57,31 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        buildConfig =true
+        dataBinding = true
+        buildConfig = true
     }
 }
+
 
 dependencies {
     //Retrofit2
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.6.4")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    //rxjava2
+    implementation("io.reactivex.rxjava2:rxjava:2.0.1")
+    implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
+
+    //picasso
+    implementation("com.squareup.picasso:picasso:2.8")
+
+    // Room
+    val roomVersion = "2.1.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
+    implementation("androidx.appcompat:appcompat:1.6.0-alpha04")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
