@@ -6,4 +6,19 @@
     </style>
 
     <style name="Theme.YuGiOhApp" parent="Base.Theme.YuGiOhApp" />
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?actionBarSize</item>
+        <item name="android:background">@color/color_primary</item>
+        <item name="navigationIcon">@drawable/back_button_image</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
+        <item name="elevation">@dimen/dimens_4dp</item>
+    </style>
+    <style name="BaseThemeBlackOpacity" parent="BaseTheme">
+        <item name="android:background">@color/black_opacity</item>
+    </style>
+
+
+    <dimen name="dimens_4dp">4dp</dimen>
 </resources>
